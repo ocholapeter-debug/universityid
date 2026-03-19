@@ -1,0 +1,233 @@
+package ug.com.universityid
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import ug.com.universityid.ui.theme.UniversityIdTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            UniversityIdTheme {
+                StudentsId()
+            }
+        }
+    }
+}
+
+@Composable
+fun  StudentsId(){
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxWidth(1F)
+            .size(height = 420.dp, width = 1000.dp)
+            .padding(10.dp),
+        shape = RoundedCornerShape(16.dp),
+
+        colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(1f,1f,1f,1f)),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp)
+    ){
+        val flag = painterResource(R.drawable.flag)
+        val logo = painterResource(R.drawable.logo)
+        val profile = painterResource(R.drawable.pic)
+       // val flag = painterResource(R.drawable.flag)
+
+
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(130.dp)
+                .background(color = Color(0xFF800000))
+        ){
+            Image(
+                painter = logo,
+                contentDescription = "University logo",
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .size(height = 130.dp, width = 100.dp)  // taller than wide → fits header
+                    .offset(y = (60).dp)               // push left so half is outside
+                    .clip(CircleShape)
+
+
+
+            )
+
+            Image(
+                painter = profile,
+                contentDescription = "profile photo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .size(height = 130.dp, width = 100.dp)  // taller than wide → fits header
+                    .offset(y = (60).dp)               // push left so half is outside
+                    .clip(CircleShape)
+
+            )
+
+            Image(
+                painter = flag,
+                contentDescription = "Ugandan flag",
+                modifier = Modifier
+                    .size(80.dp)
+                    .align(Alignment.TopEnd)
+                    .padding(20.dp),
+
+                )
+        }
+        Box {
+            // Left Watermark
+            Image(
+                painter = logo,
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .size(150.dp)
+                    .alpha(0.06f),
+                contentScale = ContentScale.Fit
+            )
+
+            // Right Watermark
+            Image(
+                painter = logo,
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .size(150.dp)
+                    .alpha(0.06f),
+                contentScale = ContentScale.Fit
+            )
+
+
+
+            Column(
+                modifier = Modifier.padding(all = 10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                 Row(
+
+                    modifier = Modifier
+                        .fillMaxWidth(1F)
+                        .background(
+                            color = Color(0xFFFFFFFF)
+                        )
+
+                ) {
+
+
+
+
+
+
+
+                }
+
+
+                Spacer(modifier = Modifier.height(60.dp))
+
+
+                Row {
+                    Text(
+                        text = "PENGERE DAVID ISRAEL"
+
+                    )
+                }
+                Row  {
+                    Text(
+                        text = " Programme:"
+                    )
+                    Text(
+                        text = " Bsc in Computer Science"
+                    )
+                }
+                Row {
+                    Text(
+                        text = " Registraton Number:"
+                    )
+                    Text(
+                        text = " 24/1/306/D/674"
+                    )
+                }
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.Start)) {
+                    Row(Modifier.weight(1f)) {
+                        Text("Date of issue: ", fontWeight = FontWeight.Medium)
+                        Text("01/02/2026")
+                    }
+                    Row(Modifier.weight(1f)) {
+                        Text("Expiry Date: ", fontWeight = FontWeight.Medium)
+                        Text("01/02/2029")
+                    }
+                }
+
+                val barcode = painterResource(R.drawable.barcode2)
+                Image(
+                    painter = barcode,
+                    contentDescription = "bar code",
+
+                    )
+
+            }}
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(40.dp)
+                .background(color = Color(0xFF800000))
+        )
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    UniversityIdTheme {
+        StudentsId()
+    }
+}
